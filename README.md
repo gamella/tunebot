@@ -5,9 +5,11 @@
 Use Makefile command
 
 $ make build
-`docker build -t tunebot .``
+
+`docker build -t tunebot .`
 
 $ make run
+
 `docker run -p 8501:8501 tunebot`
 
 ```
@@ -19,4 +21,5 @@ Collecting usage statistics. To deactivate, set browser.gatherUsageStats to Fals
 See your browser http://localhost:8501/
 
 $ make rm
+
 `docker rm -f tunebot`
