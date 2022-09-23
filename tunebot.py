@@ -5,21 +5,30 @@ import streamlit as st
 import schedule
 import time
 
-DATA = []
-
-async def job():
-    print("I'm working...")
-    DATA.append(1)
+TRADE_DATA1 = []
+TRADE_DATA2 = []
 
 async def main():
 
-    schedule.every(1).minutes.do(job)
+    def job1():
+        TRADE_DATA1.append(1)
 
-    st.markdown("# Trade")
-    element = st.empty()
+    def job2():
+        TRADE_DATA2.append(1)
+
+    schedule.every(5).seconds.do(job1)
+    schedule.every(30).seconds.do(job2)
+
+    st.markdown("# Trade1")
+    element1 = st.empty()
+
+    st.markdown("# Trade2")
+    element2 = st.empty()
 
     while True:
-        element.dataframe(DATA)
+        schedule.run_pending()
+        element1.dataframe(TRADE_DATA1)
+        element2.dataframe(TRADE_DATA2)
         time.sleep(1)
 
 if __name__ == "__main__":

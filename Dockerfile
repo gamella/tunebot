@@ -10,8 +10,8 @@ RUN apt-get update && apt-get install -y \
     git \
     && rm -rf /var/lib/apt/lists/*
 
+RUN pip3 install altair pandas streamlit schedule
+
 ADD ./tunebot.py /app/tunebot.py
-ADD ./requirements.txt /app/requirements.txt
-RUN pip3 install -r requirements.txt
 
 ENTRYPOINT ["streamlit", "run", "tunebot.py", "--server.port=8501", "--server.address=0.0.0.0"]
