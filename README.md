@@ -2,9 +2,13 @@
 
 ## How to build and run
 
-$ docker build -t tunebot .
+Use Makefile command
 
-$ docker run -p 8501:8501 tunebot
+$ make build
+`docker build -t tunebot .``
+
+$ make run
+`docker run -p 8501:8501 tunebot`
 
 ```
 Collecting usage statistics. To deactivate, set browser.gatherUsageStats to False.
@@ -13,3 +17,6 @@ Collecting usage statistics. To deactivate, set browser.gatherUsageStats to Fals
 ```
 
 See your browser http://localhost:8501/
+
+$ make rm
+`docker rm -f tunebot`
