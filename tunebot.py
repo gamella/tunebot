@@ -19,8 +19,8 @@ async def main():
     element = st.empty()
 
     while True:
-        schedule.run_pending()
         element.dataframe(DATA)
+        time.sleep(1)
 
 if __name__ == "__main__":
     try:
