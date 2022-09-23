@@ -4,35 +4,33 @@ from typing import List
 import streamlit as st
 import schedule
 import time
+import datetime
 
-TRADE_DATA1 = []
-TRADE_DATA2 = []
+TRADE_DATA = []
 
 async def main():
 
-    def job1():
-        TRADE_DATA1.append(1)
+    # entry exit job
+    def entry_job():
+        TRADE_DATA.append([datetime.datetime.now(), 0])
 
-    def job2():
-        TRADE_DATA2.append(1)
+    def exit_job():
+        for i in range(len(TRADE_DATA)):
+            if TRADE_DATA[i][1] == 0:
+                TRADE_DATA[i][1] = 1
 
-    schedule.every(5).seconds.do(job1)
-    schedule.every(30).seconds.do(job2)
+    # schedule
+    schedule.every(5).seconds.do(entry_job)
+    schedule.every(15).seconds.do(exit_job)
 
-    st.markdown("# Trade1")
+    # ui
+    st.markdown("# Trade")
     element1 = st.empty()
 
-    st.markdown("# Trade2")
-    element2 = st.empty()
-
+    # data update
     while True:
         schedule.run_pending()
-        element1.dataframe(TRADE_DATA1)
-        element2.dataframe(TRADE_DATA2)
-        time.sleep(1)
+        element1.dataframe(TRADE_DATA)
 
 if __name__ == "__main__":
-    try:
-        asyncio.run(main())
-    except KeyboardInterrupt:
-        pass
+    asyncio.run(main())
